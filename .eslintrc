@@ -1,0 +1,61 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb"
+  ],
+  "plugins": [
+    "babel",
+    "react",
+    "promise"
+  ],
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "__DEV__": false,
+    "__PROD__": false,
+    "__DEBUG__": false,
+    "__COVERAGE__": false,
+    "__BASENAME__": false
+  },
+  "rules": {
+    // React plugin rules
+    "react/jsx-curly-spacing": "error",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-first-prop-new-line": ["error", "multiline"],
+    "react/jsx-indent": ["error", 2],
+    "react/jsx-indent-props": "error",
+    "react/no-multi-comp": "off",
+    "react/require-extension": "off",
+
+    // Import plugin rules
+    "import/default": "off",
+    "import/extensions": ["error", {"js": "never", "json": "always", "scss": "always", "css": "always"}],
+    "import/imports-first": "off", // We disable this to use "import/order" instead
+    "import/named": "off",
+    "import/namespace": "off",
+    "import/newline-after-import": "off", // I'd like to have this enabled, but there's no way to distinguish between inline requires and imports
+    "import/no-duplicates": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default": "off",
+    "import/no-unresolved": "off",
+    "import/order": ["error", {"newlines-between": "never"}],
+    "import/prefer-default-export": "off",
+
+    // Standard rules
+    "func-names": "off",
+    "generator-star-spacing": "off",
+    "global-require": "error",
+    "id-length": ["error", {"min": 2, "max": 30, "exceptions": ["$"]}],
+    "indent": ["error", 2, {"SwitchCase": 1}],
+    "max-len": ["error", 100, 2, {"ignoreUrls": true, "ignoreComments": true}],
+    "no-console": "off",
+    "no-param-reassign": ["error", {"props": false}],
+    "no-nested-ternary": "error",
+    "no-shadow": ["error", {"allow": ["resolve", "reject", "done", "cb", "id"]}],
+    "no-underscore-dangle": ["error", {"allow": ["_id", "__data", "__html", "_style"]}],
+    "no-use-before-define": "off",
+    "require-yield": "off",
+    "wrap-iife": ["error", "inside"]
+  }
+}
