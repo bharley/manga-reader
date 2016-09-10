@@ -11,6 +11,10 @@ export const titles = {
     title: 'Magician',
     slug: '783_magician',
   },
+  gamer: {
+    title: 'The Gamer',
+    slug: '3796_the-gamer',
+  },
 };
 
 const getSlug = (title) => {

@@ -9,11 +9,13 @@ import classes from './HomeView.scss';
 const manga = [
   {
     name: 'Noblesse',
+    slug: 'noblesse',
     thumbnail: noblesse,
     description: 'Read about Cadis Etrama Di Raizel eating Ramen like a boss.',
   },
   {
     name: 'The Gamer',
+    slug: 'gamer',
     thumbnail: gamer,
     description: `
       Boy plays games and sometimes characters inexplicably disappear from the storyline.
@@ -21,6 +23,7 @@ const manga = [
   },
   {
     name: 'Magician',
+    slug: 'magician',
     thumbnail: magician,
     description: 'Maybe the translations will catch up some day...',
   },
