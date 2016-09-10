@@ -1,4 +1,5 @@
 import React from 'react';
+import classes from './Images.scss';
 
 const Images = ({ chapter, images }) => {
   if (!images) {
@@ -11,7 +12,7 @@ const Images = ({ chapter, images }) => {
         <img
           key={`image ${index}`}
           src={image}
-          className="img-responsive"
+          className={`img-responsive ${classes.image}`}
           alt={`${chapter}, page ${index + 1}`}
         />
       ))}
