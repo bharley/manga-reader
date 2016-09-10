@@ -1,4 +1,6 @@
 import React from 'react';
+import Measure from 'react-measure';
+import Swipeable from 'react-swipeable';
 
 export default class Navigator extends React.Component {
   static propTypes = {
@@ -6,6 +8,10 @@ export default class Navigator extends React.Component {
     next: React.PropTypes.string,
     pushRoute: React.PropTypes.func.isRequired,
     children: React.PropTypes.node,
+  };
+
+  state = {
+    width: 300,
   };
 
   componentWillMount() {
@@ -38,13 +44,32 @@ export default class Navigator extends React.Component {
     }
   };
 
+  handleSwipedLeft = () => {
+    this.goForward();
+  };
+
+  handleSwipedRight = () => {
+    this.goBack();
+  };
+
+  handleMeasure = ({ width }) => {
+    this.setState({ width });
+  };
+
   render() {
     const { children } = this.props;
+    const { width } = this.state;
 
     return (
-      <div>
-        {children}
-      </div>
+      <Measure onMeasure={this.handleMeasure}>
+        <Swipeable
+          delta={width * 0.35} // 35% of the width
+          onSwipedLeft={this.handleSwipedLeft}
+          onSwipedRight={this.handleSwipedRight}
+        >
+          {children}
+        </Swipeable>
+      </Measure>
     );
   }
 }
