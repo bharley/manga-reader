@@ -73,15 +73,17 @@ export default new class MangaInnConsumer {
 
     const title = $('#gotoMangaInfo').text().trim();
     const chapterTitle = $('#gotomangainfo2').text().replace(/^[ -]+/, '').trim();
-    const imageCount = parseInt($('#cmbpages option:last-child').text(), 10);
     const firstImage = $('#imgPage').attr('src');
     const previous = $('#chapters option[selected]').prev().val();
     const next = $('#chapters option[selected]').next().val();
 
-    const images = Array.from(Array(imageCount)).map((invalid, index) => {
-      const imageNumber = leftPad(index + 1);
+    const images = $('#cmbpages option').get().map(element => {
+      if (!element.attribs.value) {
+        return null;
+      }
+      const imageNumber = leftPad(element.attribs.value);
       return firstImage.replace(/\/\d{3}_(\d{2}_\d{2}_)/, `/${imageNumber}_$1`);
-    });
+    }).filter(img => img);
 
     return new MangaResponse(
       title,
