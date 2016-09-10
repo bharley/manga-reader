@@ -34,4 +34,4 @@ export default new class ApiClient {
       });
     });
   }
-};
+}();

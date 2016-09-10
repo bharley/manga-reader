@@ -87,4 +87,4 @@ export default new class MangaInnConsumer {
       next
     );
   }
-};
+}();
