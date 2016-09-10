@@ -1,79 +1,42 @@
 import React from 'react';
-import { Alert, Col, Row } from 'react-bootstrap';
-import { Snackbar } from 'material-ui';
+import { Col, Row } from 'react-bootstrap';
+import Navigator from './Navigator';
 import Title from './Title';
+import LoadingIndicator from './LoadingIndicator';
+import Error from './Error';
 import Pagination from './Pagination';
+import Images from './Images';
 
-export default class MangaViewer extends React.Component {
-  static propTypes = {
-    chapter: React.PropTypes.string,
-    error: React.PropTypes.string,
-    images: React.PropTypes.arrayOf(React.PropTypes.string),
-    previous: React.PropTypes.string,
-    next: React.PropTypes.string,
-  };
-
-  renderError(error) {
-    return (
+const MangaViewer = ({
+  error,
+  images,
+  chapter,
+  next,
+  previous,
+  pushRoute,
+}) => (
+  <Navigator next={next} previous={previous} pushRoute={pushRoute}>
+    <LoadingIndicator show={!error && !images} />
+    <Title title={chapter} />
+    <Pagination next={next} previous={previous} />
+    <Row>
       <Col xs={12}>
-        <Alert bsStyle="danger">
-          <b>Error</b>
-          {' '}
-          {error}
-        </Alert>
+        <Error error={error} />
+        <Images chapter={chapter} images={images} />
       </Col>
-    );
-  }
+    </Row>
+    <Pagination next={next} previous={previous} />
+    <Title title={chapter} />
+  </Navigator>
+);
 
-  renderLoading() {
-    return (
-      <Snackbar
-        open
-        message="Loading..."
-        onRequestClose={() => {}}
-      />
-    );
-  }
+MangaViewer.propTypes = {
+  chapter: React.PropTypes.string,
+  error: React.PropTypes.string,
+  images: React.PropTypes.arrayOf(React.PropTypes.string),
+  previous: React.PropTypes.string,
+  next: React.PropTypes.string,
+  pushRoute: React.PropTypes.func.isRequired,
+};
 
-  renderImages() {
-    const { images, chapter } = this.props;
-
-    return (
-      <Col xs={12}>
-        {images.map((image, index) => (
-          <img
-            key={`image ${index}`}
-            src={image}
-            className="img-responsive"
-            alt={`${chapter}, page ${index + 1}`}
-          />
-        ))}
-      </Col>
-    );
-  }
-
-  render() {
-    const { error, images, chapter, next, previous } = this.props;
-
-    let partial;
-    if (error) {
-      partial = this.renderError(error);
-    } else if (!images) {
-      partial = this.renderLoading();
-    } else {
-      partial = this.renderImages();
-    }
-
-    return (
-      <div>
-        <Title title={chapter} />
-        <Pagination next={next} previous={previous} />
-        <Row>
-          {partial}
-        </Row>
-        <Pagination next={next} previous={previous} />
-        <Title title={chapter} />
-      </div>
-    );
-  }
-}
+export default MangaViewer;

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { provideHooks } from 'redial';
 import compose from 'utils/compose';
 import { loadTitle, loadChapter } from '../modules/manga';
@@ -25,7 +26,9 @@ const mapStateToProps = ({ manga }) => {
   return { ...manga };
 };
 
+const mapDispatchToProps = { pushRoute: push };
+
 export default compose(
   provideHooks(hooks),
-  connect(mapStateToProps)
+  connect(mapStateToProps, mapDispatchToProps)
 )(MangaViewer);
